@@ -22,7 +22,7 @@
         </toggleGroup>
     </RadioButton>
     <RadioButton text="Sell USD" toggleGroup="$transactionType" GridPane.RowIndex="9" GridPane.columnIndex="1" />
-    <Button text="Add Transaction" prefHeight="25.0" prefWidth="320.0" GridPane.RowIndex="10" GridPane.columnIndex="0" GridPane.columnSpan="2" />
+    <Button text="Add Transaction" prefHeight="25.0" prefWidth="320.0" GridPane.RowIndex="10" GridPane.columnIndex="0" GridPane.columnSpan="2" onAction="#addTransaction"/>
 
 
 
