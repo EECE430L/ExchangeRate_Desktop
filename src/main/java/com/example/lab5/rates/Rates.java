@@ -1,4 +1,4 @@
-package com.example.lab5;
+package com.example.lab5.rates;
 
 import com.example.lab5.api.ExchangeService;
 import com.example.lab5.api.model.ExchangeRates;
@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Controller {
+public class Rates {
     public Label buyUsdRateLabel;
     public Label sellUsdRateLabel;
     public TextField lbpTextField;
@@ -29,10 +29,16 @@ public class Controller {
                                     Response<ExchangeRates> response) {
                  ExchangeRates exchangeRates = response.body();
                  Platform.runLater(() -> {
+                     if (exchangeRates.lbpToUsd ==null || exchangeRates.lbpToUsd.isNaN()) {
+                         buyUsdRateLabel.setText("N/A");
+                     }else{
+                         buyUsdRateLabel.setText(exchangeRates.lbpToUsd.toString());
+                     }
+                     if (exchangeRates.usdToLbp ==null || exchangeRates.usdToLbp.isNaN())
+                         sellUsdRateLabel.setText("N/A");
+                     else
+                         sellUsdRateLabel.setText(exchangeRates.usdToLbp.toString());
 
-                     buyUsdRateLabel.setText(exchangeRates.lbpToUsd.toString());
-
-                     sellUsdRateLabel.setText(exchangeRates.usdToLbp.toString());
                  });
              }
              @Override

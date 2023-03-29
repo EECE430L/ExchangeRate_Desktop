@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="475.0" prefWidth="600.0" stylesheets="@layout.css" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.lab5.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="475.0" prefWidth="600.0" stylesheets="@rates.css" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.lab5.rates.Rates">
     <Label styleClass="header" text="LBP Exchange Rate" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
     <Label styleClass="value" text="Buy USD Rate" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <Label fx:id="buyUsdRateLabel" styleClass="value-label" text="Buy Rate" GridPane.columnIndex="0" GridPane.rowIndex="5" />

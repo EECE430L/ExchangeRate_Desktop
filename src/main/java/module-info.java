@@ -8,5 +8,7 @@ module com.example.lab5 {
     opens com.example.lab5 to javafx.fxml;
     opens com.example.lab5.api.model to gson;
     exports com.example.lab5;
+    exports com.example.lab5.rates;
+    opens com.example.lab5.rates to javafx.fxml;
 
 }
