@@ -10,5 +10,8 @@ module com.example.lab5 {
     exports com.example.lab5;
     exports com.example.lab5.rates;
     opens com.example.lab5.rates to javafx.fxml;
+    requires java.prefs;
+    opens com.example.lab5.login to javafx.fxml;
+    opens com.example.lab5.register to javafx.fxml;
 
 }
