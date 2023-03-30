@@ -19,4 +19,24 @@ public class Transaction {
         this.lbpAmount = lbpAmount;
         this.usdToLbp = usdToLbp;
     }
+
+    public Float getUsdAmount() {
+        return usdAmount;
+    }
+
+    public Float getLbpAmount() {
+        return lbpAmount;
+    }
+
+    public Boolean getUsdToLbp() {
+        return usdToLbp;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getAddedDate() {
+        return addedDate;
+    }
 }

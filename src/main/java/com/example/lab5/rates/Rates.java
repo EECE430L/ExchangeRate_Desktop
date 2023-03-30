@@ -1,5 +1,6 @@
 package com.example.lab5.rates;
 
+import com.example.lab5.Authentication;
 import com.example.lab5.api.ExchangeService;
 import com.example.lab5.api.model.ExchangeRates;
 import com.example.lab5.api.model.Transaction;
@@ -19,6 +20,10 @@ public class Rates {
     public TextField lbpTextField;
     public TextField usdTextField;
     public ToggleGroup transactionType;
+    public ToggleGroup conversionType;
+    public Label AmountLabel;
+    public TextField calculatorTextField;
+
     public void initialize() {
         fetchRates();
     }
@@ -49,6 +54,9 @@ public class Rates {
     }
 
     public void addTransaction(ActionEvent actionEvent) {
+        if (usdTextField.getText().isEmpty() || lbpTextField.getText().isEmpty() || transactionType.getSelectedToggle() == null) {
+            return;
+        }
         Transaction transaction = new Transaction(
                 Float.parseFloat(usdTextField.getText()),
                 Float.parseFloat(lbpTextField.getText()),
@@ -56,10 +64,18 @@ public class Rates {
                         transactionType.getSelectedToggle()).getText().equals("Sell USD")
         );
 
-        ExchangeService.exchangeApi().addTransaction(transaction, null).enqueue(new Callback<Object>() {
+        String userToken = Authentication.getInstance().getToken();
+        String authHeader = userToken != null ? "Bearer " + userToken : null;
+        ExchangeService.exchangeApi().addTransaction(transaction,
+                authHeader).enqueue(new Callback<Object>() {
           @Override
           public void onResponse(Call<Object> call, Response<Object>
                   response) {
+              try {
+                  Thread.sleep(1000); //waiting to make sure backend has finished processing the transaction
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
               fetchRates();
               Platform.runLater(() -> {
                   usdTextField.setText("");
@@ -72,4 +88,10 @@ public class Rates {
           }
       });
     }
+
+    public void calculateRate(){
+
+
+    }
+
 }
