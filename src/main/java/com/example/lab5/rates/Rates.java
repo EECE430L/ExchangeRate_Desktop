@@ -54,7 +54,7 @@ public class Rates {
     }
 
     public void addTransaction(ActionEvent actionEvent) {
-        if (usdTextField.getText().isEmpty() || lbpTextField.getText().isEmpty() || transactionType.getSelectedToggle() == null) {
+        if (usdTextField==null || lbpTextField==null || usdTextField.getText().isEmpty() || lbpTextField.getText().isEmpty() || transactionType.getSelectedToggle() == null) {
             return;
         }
         Transaction transaction = new Transaction(
@@ -80,6 +80,7 @@ public class Rates {
               Platform.runLater(() -> {
                   usdTextField.setText("");
                   lbpTextField.setText("");
+                  transactionType.selectToggle(null);
               });
           }
           @Override
@@ -90,7 +91,21 @@ public class Rates {
     }
 
     public void calculateRate(){
-
+        if (calculatorTextField.getText()==null || calculatorTextField.getText().isEmpty() || conversionType.getSelectedToggle() == null ) {
+            return;
+        }
+        if (((RadioButton) conversionType.getSelectedToggle()).getText().equals("TO LBP")) {
+            if (sellUsdRateLabel.getText().equals("N/A"))
+                AmountLabel.setText("N/A");
+            else
+                AmountLabel.setText(String.valueOf(Float.parseFloat(calculatorTextField.getText()) * Float.parseFloat(sellUsdRateLabel.getText())));
+        } else {
+            if (buyUsdRateLabel.getText().equals("N/A"))
+                AmountLabel.setText("N/A");
+            else {
+                AmountLabel.setText(String.valueOf(Float.parseFloat(calculatorTextField.getText()) / Float.parseFloat(buyUsdRateLabel.getText())));
+            }
+        }
 
     }
 
