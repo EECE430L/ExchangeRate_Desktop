@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.exchange.statistics.Statistics"
+
+            stylesheets="@statistics.css"
+            prefHeight="400.0"
+            prefWidth="600.0"
+            fx:id="borderPane">
+
+    <top>
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER">
+                <Label text="Statistics" styleClass="header" />
+            </HBox>
+            <Region fx:id="vspacer0"/>
+            <Label text="Total number of transactions" alignment="CENTER" styleClass="value-label"/>
+            <Region fx:id="vspacer1"/>
+            <HBox alignment="CENTER">
+                <VBox alignment="CENTER" style="-fx-border-color: #002141; -fx-border-radius: 5px; -fx-border-width: 0.4em">
+                    <HBox spacing="9">
+                        <Button fx:id="usd1" styleClass="graphical-button"/>
+                        <Region prefWidth="11" />
+                        <Button fx:id="lbp1" styleClass="graphical-button"/>
+                    </HBox>
+                    <Label text="USD  ->  LBP" styleClass="value-label"/>
+                    <Region fx:id="vspacer2"/>
+                    <Label fx:id="usdToLbpNum" text="--" styleClass="value"/>
+                </VBox>
+                <Region fx:id="hspacer"/>
+                <VBox alignment="CENTER" style="-fx-border-color: #002141; -fx-border-radius: 5px; -fx-border-width: 0.4em">
+                    <HBox spacing="9">
+                        <Button fx:id="lbp2" styleClass="graphical-button"/>
+                        <Region prefWidth="11" />
+                        <Button fx:id="usd2" styleClass="graphical-button"/>
+                    </HBox>
+                    <Label text="LBP  ->  USD" styleClass="value-label"/>
+                    <Region fx:id="vspacer3"/>
+                    <Label fx:id="lbpToUsdNum" text="--" styleClass="value"/>
+                </VBox>
+            </HBox>
+            <Region prefHeight="15"/>
+            <Label text="Percentage Change" alignment="CENTER" styleClass="value-label"/>
+            <Region prefHeight="10"/>
+            <VBox alignment="CENTER" spacing="10">
+                <Label text="Buy USD % change" styleClass="value-label"/>
+
+                <Label fx:id="buyUsdChange" text="--" styleClass="value"/>
+
+                <Label text="Sell USD % change" styleClass="value-label"/>
+
+                <Label fx:id="sellUsdChange" text="--" styleClass="value"/>
+
+            </VBox>
+
+        </VBox>
+
+
+
+
+    </top>
+
+</BorderPane>

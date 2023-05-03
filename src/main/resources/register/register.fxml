@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <FlowPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.lab5.register.Register"
+          fx:controller="com.example.exchange.register.Register"
           stylesheets="@register.css"
           prefHeight="400.0" prefWidth="600.0"
           orientation="VERTICAL"
@@ -14,6 +14,8 @@
     <Label text="Username"/>
     <TextField fx:id="usernameTextField"/>
     <Label text="Password"/>
-    <TextField fx:id="passwordTextField"/>
+    <PasswordField fx:id="passwordTextField"/>
+    <Label text="Email"/>
+    <TextField fx:id="emailTextField"/>
     <Button text="Create Account" onAction="#register"/>
 </FlowPane>

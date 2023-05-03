@@ -1,0 +1,33 @@
+.root {
+    -fx-background-color: whitesmoke;
+}
+.header {
+    -fx-font-size: 24;
+}
+.value-label {
+    -fx-font-size: 20;
+}
+.value {
+    -fx-font-size: 18;
+}
+.chart-series-line {
+    -fx-stroke: #002141;
+}
+.default-color0.chart-line-symbol {
+    -fx-background-color: #002141;
+}
+
+.chart-line-symbol.usd-to-lbp-data {
+    -fx-background-color: red;
+}
+
+.series0 .chart-line-symbol.usd-to-lbp-data {
+    -fx-background-color: red;
+}
+.series0 .chart-series-line.usd-to-lbp-legend {
+    -fx-stroke: #ff0000;
+    -fx-background-color: #ff0000;
+}
+.series1.default-color1.chart-line-symbol {
+    -fx-background-color: #ff0000;
+}

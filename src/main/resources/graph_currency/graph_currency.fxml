@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          fx:controller="com.example.exchange.graph_currency.GraphCurrency" stylesheets="@graph_currency.css" >
+
+    <Label styleClass="header" text="Evolution of Currency Value" GridPane.halignment="CENTER" GridPane.rowIndex="0"  GridPane.columnSpan="4"/>
+    <Label text="From" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="RIGHT"/>
+    <Label text="   Until" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="RIGHT"/>
+
+    <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="LEFT"/>
+    <DatePicker fx:id="endDate" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="LEFT"/>
+    <Button text="✔" onAction="#getDatesAndSubmit" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="4" alignment="CENTER">
+
+
+        <LineChart fx:id="lineChart" GridPane.columnIndex="0" GridPane.columnSpan="4"
+                   styleClass="chart" legendVisible="true">
+
+            <xAxis>
+                <CategoryAxis label="Date" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Value" />
+            </yAxis>
+        </LineChart>
+
+
+    </GridPane>
+
+</GridPane>

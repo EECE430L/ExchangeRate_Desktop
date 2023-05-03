@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane stylesheets="@my_exchanges.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.exchange.my_exchanges.MyExchanges">
+    <Tab closable="false" styleClass="tab-header-area" text="Exchange Service">
+        <content>
+            <AnchorPane prefHeight="600" prefWidth="600">
+            <children>
+               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="260.0" layoutX="21.0" layoutY="109.0" stroke="#002141" strokeType="INSIDE" strokeWidth="4.0" width="342.0" />
+               <Label layoutX="41.0" layoutY="161.0" prefHeight="20.0" prefWidth="76.0" text="Recipient:">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="41.0" layoutY="227.0" prefHeight="17.0" prefWidth="62.0" text="Offering:">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <Label layoutX="52.0" layoutY="295.0" text="I want:">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <TextField layoutX="117.0" layoutY="159.0" />
+               <TextField layoutX="117.0" layoutY="225.0" />
+               <TextField layoutX="117.0" layoutY="293.0" />
+               <ChoiceBox layoutX="284.0" layoutY="226.0" prefHeight="25.0" prefWidth="57.0" />
+               <Label layoutX="130.0" layoutY="121.0" text="Make an offer">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <effect>
+                     <Glow />
+                  </effect>
+               </Label>
+               <Label layoutX="12.0" layoutY="14.0" prefHeight="43.0" prefWidth="602.0" text="To offer a transaction to a user, please input their username, the amount you are offering and in which" />
+               <Label layoutX="12.0" layoutY="49.0" text=" currency, and the amount you are requesting." />
+            </children></AnchorPane>
+        </content>
+    </Tab>
+
+    <Tab closable="false" text="Pending Offers">
+        <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <TableView fx:id="tableView" AnchorPane.bottomAnchor="4" AnchorPane.leftAnchor="4" AnchorPane.rightAnchor="4" AnchorPane.topAnchor="4">
+                    <columns>
+                        <TableColumn fx:id="party" prefWidth="150" text="Other party" />
+                        <TableColumn fx:id="type" prefWidth="150" text="Type" />
+                        <TableColumn fx:id="usdAmount" prefWidth="150" text="USD Amount" />
+                        <TableColumn fx:id="lbpAmount" prefWidth="150" text="LBP Amount" />
+                    </columns>
+                </TableView>
+            </AnchorPane>
+        </content>
+    </Tab>
+
+
+
+</TabPane>

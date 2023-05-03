@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            fx:id="borderPane" fx:controller="com.example.exchange.Parent"
+            xmlns:fx="http://javafx.com/fxml" prefHeight="400.0"
+            stylesheets="@parent.css"
+            prefWidth="600.0"
+            style="-fx-border-color: #002141; -fx-border-width: 0.5em;"
+            >
+    <left>
+        <HBox fx:id="hBox" spacing="10">
+        <VBox fx:id="menuContainer" spacing="5" styleClass="nav-container" fillWidth="true">
+            <Button styleClass="nav-button" text="Exchange Rate"
+                    onAction="#ratesSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button styleClass="nav-button" text="Statistics"
+                    onAction="#statisticsSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button styleClass="nav-button" text="Graphs"
+                    onAction="#graphsSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button fx:id="transactionButton" styleClass="nav-button"
+                    text="History"
+                    onAction="#transactionsSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button fx:id="myExchangesButton" styleClass="nav-button"
+                    text="MyExchanges"
+                    onAction="#myExchangesSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button fx:id="loginButton" styleClass="nav-button"
+                    text="Login" onAction="#loginSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button fx:id="registerButton" styleClass="nav-button"
+                    text="Register" onAction="#registerSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+            <Button fx:id="logoutButton" styleClass="nav-button" text="Log
+out" onAction="#logoutSelected"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"/>
+        </VBox>
+            <Button fx:id="showHideButton" styleClass="nav-button"
+                    style="-fx-background-color: #002141;-fx-text-fill: white;"
+                    prefWidth="40"
+                    prefHeight="40"
+                    onAction="#toggleMenuVisibility"
+            />
+        </HBox>
+    </left>
+
+    <center>
+        <fx:include source="../../../rates/rates.fxml"/>
+    </center>
+</BorderPane>

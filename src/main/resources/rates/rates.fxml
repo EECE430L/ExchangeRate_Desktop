@@ -3,10 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToWidth="true" fitToHeight="true" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.rates.Rates">
+<ScrollPane fitToWidth="true" fitToHeight="true" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.exchange.rates.Rates">
     <content>
         <GridPane alignment="center" hgap="10" prefHeight="475.0" prefWidth="600.0" stylesheets="@rates.css" vgap="10">
-
 
             <Label styleClass="header" text="LBP Exchange Rate" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
             <Label styleClass="value" text="Buy USD Rate" GridPane.columnIndex="0" GridPane.rowIndex="4" />
@@ -40,7 +39,7 @@
             </RadioButton>
             <RadioButton text="TO LBP" toggleGroup="$conversionType" GridPane.RowIndex="15" GridPane.columnIndex="1" />
             <Button text="Calculate" prefHeight="25.0" prefWidth="320.0" GridPane.RowIndex="16" GridPane.columnIndex="0" GridPane.columnSpan="2" onAction="#calculateRate"/>
-            <Label fx:id="AmountLabel" styleClass="value-label" text="Converted Amount" alignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="17" />
+            <Label fx:id="AmountLabel" styleClass="value-label" text="N/A" alignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="17" />
             <Separator orientation="VERTICAL" prefHeight="10" GridPane.rowIndex="18"/>
             <Separator orientation="VERTICAL" prefHeight="10" GridPane.rowIndex="19"/>
 
