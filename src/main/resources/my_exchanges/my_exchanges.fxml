@@ -1,47 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-
+<?import javafx.scene.text.Font?>
+<?import java.awt.*?>
+<?import java.lang.String?>
 <TabPane stylesheets="@my_exchanges.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.exchange.my_exchanges.MyExchanges">
     <Tab closable="false" styleClass="tab-header-area" text="Exchange Service">
         <content>
-            <AnchorPane prefHeight="600" prefWidth="600">
-            <children>
-               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="260.0" layoutX="21.0" layoutY="109.0" stroke="#002141" strokeType="INSIDE" strokeWidth="4.0" width="342.0" />
-               <Label layoutX="41.0" layoutY="161.0" prefHeight="20.0" prefWidth="76.0" text="Recipient:">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
-               <Label layoutX="41.0" layoutY="227.0" prefHeight="17.0" prefWidth="62.0" text="Offering:">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
-               <Label layoutX="52.0" layoutY="295.0" text="I want:">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
-               <TextField layoutX="117.0" layoutY="159.0" />
-               <TextField layoutX="117.0" layoutY="225.0" />
-               <TextField layoutX="117.0" layoutY="293.0" />
-               <ChoiceBox layoutX="284.0" layoutY="226.0" prefHeight="25.0" prefWidth="57.0" />
-               <Label layoutX="130.0" layoutY="121.0" text="Make an offer">
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-                  <effect>
-                     <Glow />
-                  </effect>
-               </Label>
-               <Label layoutX="12.0" layoutY="14.0" prefHeight="43.0" prefWidth="602.0" text="To offer a transaction to a user, please input their username, the amount you are offering and in which" />
-               <Label layoutX="12.0" layoutY="49.0" text=" currency, and the amount you are requesting." />
-            </children></AnchorPane>
+
+            <BorderPane>
+                <center>
+                    <VBox prefHeight="600" alignment="CENTER">
+                        <Region>
+                        <VBox.margin>
+                            <Insets fx:id="inset1" bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </VBox.margin>
+                        </Region>
+                        <Label text="Offer transaction to User" style="-fx-font-size: 26; -fx-font-weight: bold" />
+                        <Region>
+                            <VBox.margin>
+                                <Insets fx:id="inset10" bottom="30.0" left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                        </Region>
+
+                        <Label text="To offer a transaction to a user, please input their username, the amount you are offering and in which" />
+                        <Label text=" currency, and the amount you are requesting." />
+
+                        <Region>
+
+                            <VBox.margin>
+                                <Insets fx:id="inset" bottom="50.0" left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                        </Region>
+
+                        <VBox style="-fx-border-color: #002141; -fx-max-width: 400; -fx-border-width: 5" alignment="CENTER" >
+                            <Region>
+                                <VBox.margin>
+                                    <Insets fx:id="inset6" bottom="20.0" left="0.0" right="0.0" top="10.0" />
+                                </VBox.margin>
+                            </Region>
+                        <Label text="Make an offer" style="-fx-font-weight: bold;" >
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <effect>
+                                <Glow />
+                            </effect>
+                        </Label>
+                        <Region>
+
+                            <VBox.margin>
+                                <Insets fx:id="inset2" bottom="20.0" left="0.0" right="0.0" top="10.0" />
+                            </VBox.margin>
+                        </Region>
+                        <HBox spacing="5">
+                            <padding>
+                                <Insets left="40.0" />
+                            </padding>
+                            <VBox>
+                                <Label  text="Username: " style="-fx-font-weight: bold;"/>
+                                <Region>
+                                    <VBox.margin>
+                                        <Insets fx:id="inset7" bottom="20.0" left="0.0" right="0.0" top="10.0" />
+                                    </VBox.margin>
+                                </Region>
+                            <Label text="Offering: "  style="-fx-font-weight: bold;"/>
+                                <Region>
+                                <VBox.margin>
+                                    <Insets fx:id="inset3" bottom="20.0" left="0.0" right="0.0" top="10.0" />
+                                </VBox.margin>
+                                </Region>
+                                <Label text="Receiving: "  style="-fx-font-weight: bold;"/>
+
+                            </VBox>
+                            <VBox>
+                                <TextField fx:id="username"/>
+                                <Region>
+                                    <VBox.margin>
+                                        <Insets fx:id="inset8" bottom="10.0" left="0.0" right="0.0" top="10.0" />
+                                    </VBox.margin>
+                                </Region>
+                                <TextField fx:id="offering"/>
+                                <Region>
+                                <VBox.margin>
+                                    <Insets fx:id="inset4" bottom="10.0" left="0.0" right="0.0" top="10.0" />
+                                </VBox.margin>
+                                </Region>
+                                <TextField fx:id="receiving"/>
+                            </VBox>
+                            <VBox>
+
+                                <Region>
+                                    <VBox.margin>
+                                        <Insets fx:id="inset9" bottom="35.0" left="0.0" right="0.0" top="10.0" />
+                                    </VBox.margin>
+                                </Region>
+                                <ChoiceBox fx:id="currency">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="USD" fx:id="usdToLbp" />
+                                            <String fx:value="LBP" fx:id="lbpToUsd"/>
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+
+                                <Region>
+                                    <VBox.margin>
+                                        <Insets fx:id="inset11" bottom="10.0" left="0.0" right="0.0" top="10.0" />
+                                    </VBox.margin>
+                                </Region>
+                                <Button onAction="#offerTransaction">Submit</Button>
+                            </VBox>
+
+
+                        </HBox>
+                            <Region>
+                                <VBox.margin>
+                                    <Insets fx:id="inset5" bottom="20.0" left="0.0" right="0.0" top="10.0" />
+                                </VBox.margin>
+                            </Region>
+                        </VBox>
+                    </VBox>
+                </center>
+            </BorderPane>
+
+
         </content>
     </Tab>
 
@@ -59,7 +146,5 @@
             </AnchorPane>
         </content>
     </Tab>
-
-
 
 </TabPane>

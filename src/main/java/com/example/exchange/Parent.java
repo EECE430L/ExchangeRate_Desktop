@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class Parent implements Initializable, OnPageCompleteListener{
+
+    public static Parent instance=null;
     public BorderPane borderPane;
     public Button transactionButton;
     public Button loginButton;
@@ -23,9 +25,14 @@ public class Parent implements Initializable, OnPageCompleteListener{
     public Button logoutButton;
     public Button showHideButton;
     public HBox hBox;
+    public Button myExchangesButton;
     private static final Logger logger = Logger.getLogger(Parent.class.getName());
 
     public VBox menuContainer;
+
+    public static Parent getInstance(){
+        return instance;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateNavigation();
@@ -35,6 +42,9 @@ public class Parent implements Initializable, OnPageCompleteListener{
         imageView.setFitWidth(25);
         imageView.setFitHeight(25);
         showHideButton.setGraphic(imageView);
+        if (instance==null){
+            instance=this;
+        }
 
     }
     public void ratesSelected() {
@@ -141,5 +151,7 @@ public class Parent implements Initializable, OnPageCompleteListener{
         registerButton.setVisible(!authenticated);
         logoutButton.setManaged(authenticated);
         logoutButton.setVisible(authenticated);
+        myExchangesButton.setManaged(authenticated);
+        myExchangesButton.setVisible(authenticated);
     }
 }

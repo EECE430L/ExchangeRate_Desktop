@@ -46,4 +46,8 @@ public interface Exchange {
                                                    @Query("endYear") String endYear,
                                                    @Header("Authorization") String authorization);
 
+    @POST("/offer")
+    Call<OfferResponse> addOffer(@Body Offer offer,
+                          @Header("Authorization") String authorization);
+
 }

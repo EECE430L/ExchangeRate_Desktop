@@ -26,6 +26,27 @@ public class Register implements PageCompleter {
     //make logger
     public Logger logger = Logger.getLogger(Register.class.getName());
     public void register(ActionEvent actionEvent) {
+        if (usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty() || emailTextField.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Could not create user");
+            alert.setHeaderText("Please fill in all fields");
+            alert.setContentText("Username, password and email are required");
+            // Set the alert dialog to be non-blocking and show it
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.setAlwaysOnTop(true);
+            alert.showAndWait();
+            return;
+        }
+        if (!emailTextField.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Could not create user");
+            alert.setHeaderText("Please enter a valid email");
+            alert.setContentText("Email must be in the form of word@mail.com");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.setAlwaysOnTop(true);
+            alert.showAndWait();
+            return;
+        }
         User user = new User(usernameTextField.getText(),
                 passwordTextField.getText(), emailTextField.getText());
         ExchangeService.exchangeApi().addUser(user).enqueue(new Callback<User>() {
