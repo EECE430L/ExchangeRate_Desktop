@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tooltip;
 import retrofit2.Call;
@@ -18,6 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -35,19 +37,16 @@ public class GraphCurrency {
     private DatePicker endDate;
 
     private final Tooltip closestDataPointsTooltip = new Tooltip();
-    List<XYChart.Data<String, Number>> closestDataPoints = new ArrayList<>();
+    List<XYChart.Data<String, Number>> closestDataPoints = new ArrayList<>(); //reference: https://docs.oracle.com/javafx/2/charts/line-chart.htm#CIHGBCFI
 
     public void initialize() {
-        // Create a data series with some sample data
 
         XYChart.Series<String, Number> LBPToUSD = new XYChart.Series<>();
         XYChart.Series<String, Number> USDToLBP = new XYChart.Series<>();
         closestDataPointsTooltip.setStyle("-fx-font-size: 15; -fx-font-weight: bold;");
-        //get today's date
+
         Date endDate = new Date();
-        //get the start day 1 week before today
-        Date startDate = new Date(endDate.getTime() - 7 * 24 * 3600 * 1000);
-        //get the fluctuations between 1 week ago and today
+        Date startDate = new Date(endDate.getTime() - 7 * 24 * 3600 * 1000); //reference: https://stackoverflow.com/questions/4902653/java-util-date-seven-days-ago
         fetchFluctuations(LBPToUSD, startDate.getDate() + "", endDate.getDate() + "", startDate.getMonth() + 1 + "", endDate.getMonth() + 1 + "", startDate.getYear() + 1900 + "", endDate.getYear() + 1900 + "", USDToLBP);
         for (XYChart.Data<String, Number> dataPoint : LBPToUSD.getData()) {
             Logger.getGlobal().info(dataPoint.getYValue().toString());
@@ -56,6 +55,12 @@ public class GraphCurrency {
             Logger.getGlobal().warning(dataPoint.getXValue().toString());
         }
 
+
+
+
+    }
+
+    public void setListener(XYChart.Series<String, Number> LBPToUSD, XYChart.Series<String, Number> USDToLBP){ //http://java-buddy.blogspot.com/2015/07/detect-mouse-event-on-javafx-linechart.html
         lineChart.setOnMouseMoved(event -> {
             if (!closestDataPoints.isEmpty()){
                 for (XYChart.Data<String, Number> dataPoint : closestDataPoints) {
@@ -89,8 +94,8 @@ public class GraphCurrency {
                     if (d.getXValue().equals(closestDataPoints.get(0).getXValue()) && !closestDataPoints.contains(d)) {
                         closestDataPoints.add(d);
                     }
-                    }
                 }
+            }
 
             if (!closestDataPoints.isEmpty()) {
                 StringBuilder tooltipTextBuilder = new StringBuilder();
@@ -108,6 +113,10 @@ public class GraphCurrency {
                         tooltipTextBuilder.append(String.format("BUY USD Rate: %.2f\n",
                                 dataPoint.getYValue().doubleValue()));
                     }else{
+                        for (int i=0;i <LBPToUSD.getData().size(); i++){
+                            logger.info(LBPToUSD.getData().get(i).getXValue());
+                            logger.info(LBPToUSD.getData().get(i).getYValue().toString());
+                        }
                         tooltipTextBuilder.append(String.format("SELL USD Rate: %.2f\n",
                                 dataPoint.getYValue().doubleValue()));
                     }
@@ -119,10 +128,31 @@ public class GraphCurrency {
                 closestDataPointsTooltip.hide();
             }
         });
-
     }
 
+
     public void getDatesAndSubmit(){
+        if(startDate.getValue() == null || endDate.getValue() == null){
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please select a start and end date");
+                alert.showAndWait();
+                return;
+            });
+            return;
+
+        }
+        if (startDate.getValue().isAfter(endDate.getValue())){
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Start date must be before end date");
+                alert.showAndWait();
+                return;
+            });
+            return;
+        }
         String StartDay = startDate.getValue().getDayOfMonth() + "";
         String EndDay = endDate.getValue().getDayOfMonth() + "";
         String StartMonth = startDate.getValue().getMonthValue() + "";
@@ -168,12 +198,16 @@ public class GraphCurrency {
                                     for (Fluctuation lbpExchangeRateDate : listLBPExchange) {
                                         if (lbpExchangeRateDate.getLbpToUsdRate() != null) {
                                             Platform.runLater(()->LBPToUSD.getData().add(new XYChart.Data<>(lbpExchangeRateDate.getDate(), lbpExchangeRateDate.getLbpToUsdRate())));
+                                        }else{
+                                            Platform.runLater(()->LBPToUSD.getData().add(new XYChart.Data<>(lbpExchangeRateDate.getDate(), 0.0)));
                                         }
                                     }
                                     logger.info("LBP to USD: " + listLBPExchange.size());
                                     LBPToUSD.setName("LBP to USD");
                                     lineChart.setAnimated(false);
-                                    Platform.runLater(() -> {
+                           LBPToUSD.getData().sort(Comparator.comparing(data -> data.getXValue().toString()));
+
+                           Platform.runLater(() -> {
                                         lineChart.getData().add(LBPToUSD);
                                     }
                                     );
@@ -182,10 +216,12 @@ public class GraphCurrency {
                                     for (Fluctuation lbpExchangeRateDate : listLBPExchange) {
                                         if (lbpExchangeRateDate.getUsdToLbpRate() != null) {
                                             Platform.runLater(()->USDToLBP.getData().add(new XYChart.Data<>(lbpExchangeRateDate.getDate(), lbpExchangeRateDate.getUsdToLbpRate())));
+                                        }else{
+                                            Platform.runLater(()->USDToLBP.getData().add(new XYChart.Data<>(lbpExchangeRateDate.getDate(), 0.0)));
                                         }
                                     }
                                     USDToLBP.setName("USD to LBP");
-
+                                    USDToLBP.getData().sort(Comparator.comparing(data -> data.getXValue().toString()));
                                     Platform.runLater(() -> {
                                                 lineChart.getData().add(USDToLBP);
                                                 Node node = USDToLBP.getNode();
@@ -203,6 +239,12 @@ public class GraphCurrency {
                                                 }
                                             }
                                     );
+
+                                    Platform.runLater(()->
+                                    {
+                                        lineChart.setOnMouseMoved(null);
+                                        setListener(LBPToUSD, USDToLBP);
+                                    });
                                 }
                             @Override
                             public void onFailure(Call<List<Fluctuation>> call,

@@ -6,7 +6,10 @@ import com.example.exchange.api.model.NumTransactions;
 import com.example.exchange.api.model.PercentageChange;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,30 +20,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class Statistics {
-/*
-    @FXML
-    TableView tableView;
-
-    @FXML
-    TableColumn usdAmount;
-
-    @FXML
-    TableColumn lbpAmount;
-
-    @FXML
-    BorderPane borderPane;
-
-    @FXML
-    TableColumn usdPercentChange;
-
-    @FXML
-    TableColumn lbpPercentChange;
-
- */
-
     @FXML
     BorderPane borderPane;
     @FXML
@@ -80,6 +63,12 @@ public class Statistics {
     @FXML
     Label sellUsdChange;
 
+    @FXML
+    private DatePicker startDate;
+
+    @FXML
+    private DatePicker endDate;
+
     public void attachImage(Button button, String path){
         URL url2 = getClass().getResource(path);
         Image image = new Image(url2.toString());
@@ -98,13 +87,34 @@ public class Statistics {
         attachImage(usd1,"/images/usa.png");
         attachImage(lbp2,"/images/leb.jpg");
         attachImage(usd2,"/images/usa.png");
-        fetchStatistics("26","26","4","4","2023","2023");
-        //fetchStatistics();
-        //usdAmount.setPrefWidth(borderPane.getPrefWidth()/2);
-        //lbpAmount.setPrefWidth(borderPane.getPrefWidth()/2);
-        //usdPercentChange.setPrefWidth(borderPane.getPrefWidth()/2);
-        //lbpPercentChange.setPrefWidth(borderPane.getPrefWidth()/2);
+        Date endDate = new Date();
+        Date startDate = new Date(endDate.getTime() - 7 * 24 * 3600 * 1000);
+        fetchStatistics( startDate.getDate() + "", endDate.getDate() + "", startDate.getMonth() + 1 + "", endDate.getMonth() + 1 + "", startDate.getYear() + 1900 + "", endDate.getYear() + 1900 + "");
     }
+
+    public void getDatesAndSubmit(){
+        if(startDate.getValue() == null || endDate.getValue() == null){
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please select a start and end date");
+                alert.showAndWait();
+                return;
+            });
+            return;
+
+        }
+        String StartDay = startDate.getValue().getDayOfMonth() + "";
+        String EndDay = endDate.getValue().getDayOfMonth() + "";
+        String StartMonth = startDate.getValue().getMonthValue() + "";
+        String EndMonth = endDate.getValue().getMonthValue() + "";
+        String StartYear = startDate.getValue().getYear() + "";
+        String EndYear = endDate.getValue().getYear() + "";
+        XYChart.Series<String, Number> LBPToUSD = new XYChart.Series<>();
+        XYChart.Series<String, Number> USDToLBP = new XYChart.Series<>();
+        fetchStatistics( StartDay, EndDay, StartMonth, EndMonth, StartYear, EndYear);
+    }
+
     public void fetchStatistics(String StartDay, String EndDay, String StartMonth, String EndMonth, String StartYear, String EndYear){
         String userToken = Authentication.getInstance().getToken();
         String authHeader = userToken != null ? "Bearer " + userToken : null;

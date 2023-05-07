@@ -132,17 +132,36 @@
         </content>
     </Tab>
 
-    <Tab closable="false" text="Pending Offers">
+    <Tab closable="false" text="Outgoing Offers" fx:id="tab">
         <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                <TableView fx:id="tableView" AnchorPane.bottomAnchor="4" AnchorPane.leftAnchor="4" AnchorPane.rightAnchor="4" AnchorPane.topAnchor="4">
+            <AnchorPane fx:id="sentAnchorPane">
+                <TableView fx:id="sentTableView" AnchorPane.bottomAnchor="4" AnchorPane.leftAnchor="4" AnchorPane.rightAnchor="4" AnchorPane.topAnchor="4">
                     <columns>
-                        <TableColumn fx:id="party" prefWidth="150" text="Other party" />
-                        <TableColumn fx:id="type" prefWidth="150" text="Type" />
-                        <TableColumn fx:id="usdAmount" prefWidth="150" text="USD Amount" />
-                        <TableColumn fx:id="lbpAmount" prefWidth="150" text="LBP Amount" />
+                        <TableColumn fx:id="sentParty" prefWidth="150" text="Receiver" />
+
+                        <TableColumn fx:id="sentOffered" prefWidth="150" text="Offered Amount" />
+                        <TableColumn fx:id="sentRequested" prefWidth="150" text="Requested Amount" />
+                        <TableColumn fx:id="sentType" prefWidth="150" text="USD to LBP" />
                     </columns>
                 </TableView>
+                <Button layoutX="14.0" layoutY="14.0" onAction="#refreshData" text="Refresh" AnchorPane.topAnchor="4.0" AnchorPane.rightAnchor="10.0" />
+            </AnchorPane>
+        </content>
+    </Tab>
+    <Tab closable="false" text="Incoming Offers">
+        <content>
+            <AnchorPane fx:id="receivedAnchorPane">
+                <TableView fx:id="receivedTableView" AnchorPane.bottomAnchor="4" AnchorPane.leftAnchor="4" AnchorPane.rightAnchor="4" AnchorPane.topAnchor="4">
+                    <columns>
+                        <TableColumn fx:id="receivedParty" prefWidth="150" text="Sender" />
+
+                        <TableColumn fx:id="receivedOffered" prefWidth="150" text="Offered Amount" />
+                        <TableColumn fx:id="receivedRequested" prefWidth="150" text="Requested Amount" />
+                        <TableColumn fx:id="receivedType" prefWidth="150" text="USD to LBP" />
+                    </columns>
+
+                </TableView>
+                <Button layoutX="14.0" layoutY="14.0" onAction="#refreshData" text="Refresh" AnchorPane.topAnchor="4.0" AnchorPane.rightAnchor="10.0" />
             </AnchorPane>
         </content>
     </Tab>

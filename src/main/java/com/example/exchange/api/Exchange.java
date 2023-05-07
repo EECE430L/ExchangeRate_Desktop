@@ -50,4 +50,17 @@ public interface Exchange {
     Call<OfferResponse> addOffer(@Body Offer offer,
                           @Header("Authorization") String authorization);
 
+    @GET("/offer/sent")
+    Call<List<OfferResponse>> getSentOffers(@Header("Authorization") String authorization);
+
+    @GET("/offer/received")
+    Call<List<OfferResponse>> getReceivedOffers(@Header("Authorization") String authorization);
+
+    @POST("/offer/process-offer")
+    Call<ProcessOffer> processOffer(@Body ProcessOffer processOffer,
+                                            @Header("Authorization") String authorization);
+
+    @GET("/transaction/excel-transactions")
+    Call<Object> exportTransactions(@Header("Authorization") String authorization);
+
 }

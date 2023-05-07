@@ -23,8 +23,10 @@
                          prefWidth="150"/>
             <TableColumn text="LBP Amount" fx:id="lbpAmount"
                          prefWidth="150"/>
-            <TableColumn text="Transaction Date" fx:id="transactionDate"
-                         prefWidth="200"/>
+            <TableColumn text="Date" fx:id="transactionDate"
+                         prefWidth="400"/>
         </columns>
+
     </TableView>
+    <Button layoutX="14.0" layoutY="14.0" onAction="#export" text="Export " AnchorPane.topAnchor="4.0" AnchorPane.rightAnchor="10.0" />
 </AnchorPane>

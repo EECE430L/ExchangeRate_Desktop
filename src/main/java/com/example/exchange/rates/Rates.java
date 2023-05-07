@@ -6,10 +6,8 @@ import com.example.exchange.api.model.ExchangeRates;
 import com.example.exchange.api.model.Transaction;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +25,20 @@ public class Rates {
     public void initialize() {
         fetchRates();
     }
+
+    public void clearAllFields(){
+        Platform.runLater(() -> {
+            usdTextField.setText("");
+            lbpTextField.setText("");
+            transactionType.selectToggle(null);
+            conversionType.selectToggle(null);
+            calculatorTextField.setText("");
+            AmountLabel.setText("N/A");
+        });
+    }
+
     private void fetchRates() {
+
         ExchangeService.exchangeApi().getExchangeRates().enqueue(new Callback<ExchangeRates>() {
              @Override
              public void onResponse(Call<ExchangeRates> call,
@@ -54,7 +65,23 @@ public class Rates {
     }
 
     public void addTransaction(ActionEvent actionEvent) {
+
         if (usdTextField==null || lbpTextField==null || usdTextField.getText().isEmpty() || lbpTextField.getText().isEmpty() || transactionType.getSelectedToggle() == null) {
+            return;
+        }
+        if (!lbpTextField.getText().matches("\\d+") || !usdTextField.getText().matches("\\d+")) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Fields");
+                alert.setHeaderText(null);
+                alert.setContentText("Please enter valid numbers for lbp and usd fields");
+                // Set the alert dialog to be non-blocking and show it
+                Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+                stage.setAlwaysOnTop(true);
+                alert.showAndWait();
+                clearAllFields();
+                return;
+            });
             return;
         }
         Transaction transaction = new Transaction(
@@ -92,6 +119,10 @@ public class Rates {
 
     public void calculateRate(){
         if (calculatorTextField.getText()==null || calculatorTextField.getText().isEmpty() || conversionType.getSelectedToggle() == null ) {
+            return;
+        }
+        if (!calculatorTextField.getText().matches("\\d+")){
+            clearAllFields();
             return;
         }
         if (((RadioButton) conversionType.getSelectedToggle()).getText().equals("TO LBP")) {

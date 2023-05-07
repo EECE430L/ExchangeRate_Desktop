@@ -1,9 +1,12 @@
 package com.example.exchange.transactions;
 
 import com.example.exchange.Authentication;
+import com.example.exchange.Parent;
 import com.example.exchange.api.ExchangeService;
 import com.example.exchange.api.model.Transaction;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,6 +51,47 @@ public class Transactions implements Initializable {
                                           Throwable throwable) {
                     }
                 });
+    }
+
+    public void export(){
+        String userToken = Authentication.getInstance().getToken();
+        String authHeader = userToken != null ? "Bearer " + userToken : null;
+        if (authHeader == null){
+            Parent.getInstance().logoutSelected();
+        }
+
+        ExchangeService.exchangeApi().exportTransactions(authHeader).enqueue(
+                new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        if (response.code()==401){
+                            Platform.runLater(()->{
+                                Parent.getInstance().logoutSelected();
+                            });
+                            return;
+                        }
+                        if (!response.isSuccessful()){
+                            return;
+                        }
+
+                        Platform.runLater(
+                                ()->{
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Export");
+                                    alert.setHeaderText("Exported Successfully");
+                                    alert.setContentText("Check your email");
+                                    alert.showAndWait();
+                                }
+                        );
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable throwable) {
+                        System.out.println("Failed to export");
+                    }
+                }
+        );
     }
 
 }
