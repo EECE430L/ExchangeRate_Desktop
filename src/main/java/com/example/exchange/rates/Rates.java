@@ -58,6 +58,7 @@ public class Rates {
                          sellUsdRateLabel.setText(exchangeRates.usdToLbp.toString());
                      scrollPane.setAccessibleText("The exchange Rate today is: "+buyUsdRateLabel.getText()+" LBP for 1 USD" +
                              " and "+sellUsdRateLabel.getText()+" LBP for 1 USD");
+                     //reference: https://www.youtube.com/watch?v=Jao3s_CwdRU
 
                  });
              }
