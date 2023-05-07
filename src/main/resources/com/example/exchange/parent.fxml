@@ -45,6 +45,7 @@ out" onAction="#logoutSelected"
                     prefWidth="40"
                     prefHeight="40"
                     onAction="#toggleMenuVisibility"
+                    accessibleText="Click to toggle left menu"
             />
         </HBox>
     </left>

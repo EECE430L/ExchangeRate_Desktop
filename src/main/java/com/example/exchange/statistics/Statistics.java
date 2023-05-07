@@ -7,19 +7,18 @@ import com.example.exchange.api.model.PercentageChange;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -69,6 +68,9 @@ public class Statistics {
     @FXML
     private DatePicker endDate;
 
+    public Tooltip tooltip;
+
+
     public void attachImage(Button button, String path){
         URL url2 = getClass().getResource(path);
         Image image = new Image(url2.toString());
@@ -78,6 +80,12 @@ public class Statistics {
         button.setGraphic(imageView);
     }
     public void initialize(){
+        if (tooltip == null) {
+            tooltip = new Tooltip();
+        }
+        tooltip.setOpacity(0.0);
+        tooltip.setShowDelay(Duration.ZERO);
+        Tooltip.install(borderPane,tooltip);
         hspacer.setPrefWidth(borderPane.getPrefWidth()/10);
         vspacer1.setPrefHeight(borderPane.getPrefHeight()/10);
         vspacer2.setPrefHeight(borderPane.getPrefHeight()/10);
@@ -87,9 +95,12 @@ public class Statistics {
         attachImage(usd1,"/images/usa.png");
         attachImage(lbp2,"/images/leb.jpg");
         attachImage(usd2,"/images/usa.png");
-        Date endDate = new Date();
-        Date startDate = new Date(endDate.getTime() - 7 * 24 * 3600 * 1000);
-        fetchStatistics( startDate.getDate() + "", endDate.getDate() + "", startDate.getMonth() + 1 + "", endDate.getMonth() + 1 + "", startDate.getYear() + 1900 + "", endDate.getYear() + 1900 + "");
+        Date _endDate = new Date();
+        Date _startDate = new Date(_endDate.getTime() - 7 * 24 * 3600 * 1000);
+        endDate.setValue(_endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        startDate.setValue(_startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        fetchStatistics( _startDate.getDate() + "", _endDate.getDate() + "", _startDate.getMonth() + 1 + "", _endDate.getMonth() + 1 + "", _startDate.getYear() + 1900 + "", _endDate.getYear() + 1900 + "");
+        borderPane.requestFocus();
     }
 
     public void getDatesAndSubmit(){
@@ -168,6 +179,7 @@ public class Statistics {
                                                                 }else{
                                                                     lbpToUsdNum.setText("0");
                                                                 }
+                                                                tooltip.setText("Between "+StartDay+" "+StartMonth+" "+StartYear+" and " +EndDay+" "+EndMonth+" "+EndYear+ "there are " + numUsdLbp + " USD to LBP transactions and " + numLbpUsd + " LBP to USD transactions"+ " and the percentage change is " + sellUsdChange.getText() + " for USD to LBP and " + buyUsdChange.getText() + " for LBP to USD");
                                                             });
                                                         }
                                                     }
@@ -187,5 +199,9 @@ public class Statistics {
                 );
 
 
+    }
+
+    public void readStatistics() {
+        borderPane.requestFocus();
     }
 }

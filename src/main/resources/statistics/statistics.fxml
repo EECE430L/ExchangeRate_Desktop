@@ -7,10 +7,10 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.exchange.statistics.Statistics"
-
             stylesheets="@statistics.css"
             prefHeight="400.0"
             prefWidth="600.0"
+            onMouseClicked="#readStatistics"
             fx:id="borderPane">
 
     <top>
@@ -21,10 +21,10 @@
             <HBox alignment="CENTER" spacing="15">
 
                 <Label text="From" />
-                <DatePicker fx:id="startDate"  />
+                <DatePicker fx:id="startDate"  accessibleText="Choose start date"/>
                 <Label text="Until" />
-                <DatePicker fx:id="endDate" />
-                <Button text="✔" onAction="#getDatesAndSubmit" />
+                <DatePicker fx:id="endDate" accessibleText="Choose end date"/>
+                <Button text="✔" onAction="#getDatesAndSubmit" accessibleText="Submit"/>
             </HBox>
 
             <Region fx:id="vspacer0"/>

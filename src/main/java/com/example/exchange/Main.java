@@ -20,6 +20,7 @@ public class Main extends Application {
         stage.setTitle("Currency Exchange");
         stage.setScene(scene);
         stage.show();
+        System.setProperty("javafx.accessibility.enabled", "true");
     }
 
 

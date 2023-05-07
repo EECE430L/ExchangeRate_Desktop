@@ -12,9 +12,9 @@
     <Label text="From" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="RIGHT"/>
     <Label text="   Until" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="RIGHT"/>
 
-    <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="LEFT"/>
-    <DatePicker fx:id="endDate" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="LEFT"/>
-    <Button text="✔" onAction="#getDatesAndSubmit" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+    <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="LEFT" accessibleText="Choose start date"/>
+    <DatePicker fx:id="endDate" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="LEFT" accessibleText="Choose end date"/>
+    <Button text="✔" onAction="#getDatesAndSubmit" GridPane.columnIndex="4" GridPane.rowIndex="1" accessibleText="submit"/>
     <GridPane GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="4" alignment="CENTER">
 
 

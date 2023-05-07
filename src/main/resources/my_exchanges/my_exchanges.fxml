@@ -62,7 +62,7 @@
                                 <Insets left="40.0" />
                             </padding>
                             <VBox>
-                                <Label  text="Username: " style="-fx-font-weight: bold;"/>
+                                <Label  text="Recipient Username: " style="-fx-font-weight: bold;"/>
                                 <Region>
                                     <VBox.margin>
                                         <Insets fx:id="inset7" bottom="20.0" left="0.0" right="0.0" top="10.0" />
@@ -78,19 +78,19 @@
 
                             </VBox>
                             <VBox>
-                                <TextField fx:id="username"/>
+                                <TextField fx:id="username" accessibleText="Input Recipient Username"/>
                                 <Region>
                                     <VBox.margin>
                                         <Insets fx:id="inset8" bottom="10.0" left="0.0" right="0.0" top="10.0" />
                                     </VBox.margin>
                                 </Region>
-                                <TextField fx:id="offering"/>
+                                <TextField fx:id="offering" accessibleText="Input Offering amount"/>
                                 <Region>
                                 <VBox.margin>
                                     <Insets fx:id="inset4" bottom="10.0" left="0.0" right="0.0" top="10.0" />
                                 </VBox.margin>
                                 </Region>
-                                <TextField fx:id="receiving"/>
+                                <TextField fx:id="receiving" accessibleText="Input how much you want for this"/>
                             </VBox>
                             <VBox>
 
@@ -99,7 +99,7 @@
                                         <Insets fx:id="inset9" bottom="35.0" left="0.0" right="0.0" top="10.0" />
                                     </VBox.margin>
                                 </Region>
-                                <ChoiceBox fx:id="currency">
+                                <ChoiceBox fx:id="currency" accessibleText="Choose currency">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">
                                             <String fx:value="USD" fx:id="usdToLbp" />

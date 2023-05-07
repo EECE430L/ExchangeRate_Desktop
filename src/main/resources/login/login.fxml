@@ -15,8 +15,8 @@
 >
     <Label styleClass="title" text="Login"/>
     <Label text="Username"/>
-    <TextField fx:id="usernameTextField"/>
+    <TextField fx:id="usernameTextField" accessibleText="Please input your username"/>
     <Label text="Password"/>
-    <PasswordField fx:id="passwordTextField"/>
+    <PasswordField fx:id="passwordTextField" accessibleText="Please input your password"/>
     <Button text="Login" onAction="#login"/>
 </FlowPane>

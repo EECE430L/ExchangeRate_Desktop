@@ -22,6 +22,8 @@ public class Rates {
     public Label AmountLabel;
     public TextField calculatorTextField;
 
+    public ScrollPane scrollPane;
+
     public void initialize() {
         fetchRates();
     }
@@ -54,6 +56,8 @@ public class Rates {
                          sellUsdRateLabel.setText("N/A");
                      else
                          sellUsdRateLabel.setText(exchangeRates.usdToLbp.toString());
+                     scrollPane.setAccessibleText("The exchange Rate today is: "+buyUsdRateLabel.getText()+" LBP for 1 USD" +
+                             " and "+sellUsdRateLabel.getText()+" LBP for 1 USD");
 
                  });
              }

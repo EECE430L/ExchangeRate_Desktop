@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -41,13 +42,16 @@ public class GraphCurrency {
 
     public void initialize() {
 
+
         XYChart.Series<String, Number> LBPToUSD = new XYChart.Series<>();
         XYChart.Series<String, Number> USDToLBP = new XYChart.Series<>();
         closestDataPointsTooltip.setStyle("-fx-font-size: 15; -fx-font-weight: bold;");
 
-        Date endDate = new Date();
-        Date startDate = new Date(endDate.getTime() - 7 * 24 * 3600 * 1000); //reference: https://stackoverflow.com/questions/4902653/java-util-date-seven-days-ago
-        fetchFluctuations(LBPToUSD, startDate.getDate() + "", endDate.getDate() + "", startDate.getMonth() + 1 + "", endDate.getMonth() + 1 + "", startDate.getYear() + 1900 + "", endDate.getYear() + 1900 + "", USDToLBP);
+        Date _endDate = new Date();
+        Date _startDate = new Date(_endDate.getTime() - 7 * 24 * 3600 * 1000); //reference: https://stackoverflow.com/questions/4902653/java-util-date-seven-days-ago
+        endDate.setValue(_endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        startDate.setValue(_startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        fetchFluctuations(LBPToUSD, _startDate.getDate() + "", _endDate.getDate() + "", _startDate.getMonth() + 1 + "", _endDate.getMonth() + 1 + "", _startDate.getYear() + 1900 + "", _endDate.getYear() + 1900 + "", USDToLBP);
         for (XYChart.Data<String, Number> dataPoint : LBPToUSD.getData()) {
             Logger.getGlobal().info(dataPoint.getYValue().toString());
         }
