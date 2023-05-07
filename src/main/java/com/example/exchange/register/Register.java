@@ -37,7 +37,7 @@ public class Register implements PageCompleter {
             alert.showAndWait();
             return;
         }
-        if (!emailTextField.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+        if (!emailTextField.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){ //reference: https://www.w3resource.com/javascript/form/email-validation.php
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Could not create user");
             alert.setHeaderText("Please enter a valid email");

@@ -30,3 +30,4 @@
 - [Java Buddy](http://java-buddy.blogspot.com)
 - [GeeksforGeeks](https://www.geeksforgeeks.org/)
 - [Youtube](https://www.youtube.com/)
+- [W3Resources]](https://www.w3resource.com/)
