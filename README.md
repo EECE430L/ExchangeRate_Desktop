@@ -2,8 +2,8 @@
 
 ## Dependencies
 ### The dependencies are in [pom.xml](pom.xml).
-- `squareup.retrofit2.converter.gson`: Javafx Maven Plugin for JSON Serialization and Deserialization
-- `squareup.retrofit2.retrofit`: JavaFX Maven Plugin for HTTP Client to call the backend API
+- `com.squareup.retrofit2:retrofit:2.9.0`: Javafx Maven Plugin for JSON Serialization and Deserialization
+- `com.squareup.retrofit2:converter-gson:2.9.0`: JavaFX Maven Plugin for HTTP Client to call the backend API
 
 
 ## Steps to run the app
@@ -11,7 +11,7 @@
 1. Clone the repository
 2. Open the project with intelliJ
 3. Download the dependencies (Prject Structure -> Libraries -> + -> From Maven)
-4. Run the app directly from intelliJ
+4. Run Main directly from intelliJ
 
 ## Structure
 
