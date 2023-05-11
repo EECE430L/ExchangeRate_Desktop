@@ -74,12 +74,12 @@ public class Rates {
         if (usdTextField==null || lbpTextField==null || usdTextField.getText().isEmpty() || lbpTextField.getText().isEmpty() || transactionType.getSelectedToggle() == null) {
             return;
         }
-        if (!lbpTextField.getText().matches("\\d+") || !usdTextField.getText().matches("\\d+")) {
+        if (!lbpTextField.getText().matches("\\d+(\\.\\d+)?") || !usdTextField.getText().matches("\\d+(\\.\\d+)?")) {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Fields");
                 alert.setHeaderText(null);
-                alert.setContentText("Please enter valid numbers for lbp and usd fields");
+                alert.setContentText("Please enter valid positive numbers for lbp and usd fields");
                 // Set the alert dialog to be non-blocking and show it
                 Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
                 stage.setAlwaysOnTop(true);
@@ -126,7 +126,7 @@ public class Rates {
         if (calculatorTextField.getText()==null || calculatorTextField.getText().isEmpty() || conversionType.getSelectedToggle() == null ) {
             return;
         }
-        if (!calculatorTextField.getText().matches("\\d+")){
+        if (!calculatorTextField.getText().matches("\\d+(\\.\\d+)?")){
             clearAllFields();
             return;
         }

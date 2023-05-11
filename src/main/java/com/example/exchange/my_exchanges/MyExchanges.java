@@ -250,7 +250,7 @@ public class MyExchanges {
             });
             return;
         }
-        if (!offering.getText().matches("\\d+") || !receiving.getText().matches("\\d+")) {
+        if (!offering.getText().matches("\\d+(\\.\\d+)?") || !receiving.getText().matches("\\d+(\\.\\d+)?")) {
             Platform.runLater(() -> {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Fields");
